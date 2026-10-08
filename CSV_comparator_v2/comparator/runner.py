@@ -41,9 +41,24 @@ def _empty_temp(temp_folder: Path) -> None:
             pass
 
 
+def _disk_probe(folder: Path) -> Path:
+    """Return a directory that exists, for a free-space check.
+
+    On Linux a relative path that does not exist yet has an empty anchor.
+    disk_usage rejects that empty path, so walk up to a real directory.
+    """
+    current = Path(folder)
+    while not current.exists():
+        parent = current.parent
+        if parent == current:
+            return Path.cwd()
+        current = parent
+    return current
+
+
 def _disk_ok(settings: Settings, ds_path: Path, infa_path: Path) -> tuple[bool, str]:
     needed = settings.disk_free_factor * (ds_path.stat().st_size + infa_path.stat().st_size)
-    usage = shutil.disk_usage(settings.output_folder if settings.output_folder.exists() else Path(settings.output_folder).anchor)
+    usage = shutil.disk_usage(_disk_probe(settings.output_folder))
     if usage.free < needed:
         return False, (
             f"Need {needed / (1024**3):.2f} GB free "

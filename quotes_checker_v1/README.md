@@ -8,17 +8,17 @@ A CSV file is a table saved as plain text. The first row is usually the column n
 
 1. Install Python.
 2. Name the file so it ends with `.csv`. Example: `customer.csv`.
-3. Put the file in `quotes_checker_v1\input_for_quote_check`.
-4. Open a command window in the main folder (the one with `requirements.txt`) and create the virtual environment:
+3. Put the file in `quotes_checker_v1/input_for_quote_check`.
+4. Open a terminal in the main folder (the one with `requirements.txt`) and create the virtual environment:
 
 ```text
-python -m venv .venv
+python3 -m venv .venv
 ```
 
 5. Enter it:
 
 ```text
-.venv\Scripts\activate
+source .venv/bin/activate
 ```
 
 6. First time only, install the requirements:
@@ -33,7 +33,7 @@ python -m pip install -r requirements.txt
 python -m quotes_checker_v1
 ```
 
-The short answer appears in the window. The full note for `customer.csv` is `customer.csv.txt` in `quotes_checker_v1\output_for_quote_check`. Later runs start at step 5.
+The short answer appears in the terminal. The full note for `customer.csv` is `customer.csv.txt` in `quotes_checker_v1/output_for_quote_check`. Later runs start at step 5.
 
 ---
 
@@ -80,7 +80,7 @@ Change one thing at a time. Run the command again after each change.
 Leave the input folder as it is, and name the file at the end of the command.
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 "quotes_checker_v1\input_for_quote_check\customer.csv"
+.venv/bin/python -m quotes_checker_v1 "quotes_checker_v1/input_for_quote_check/customer.csv"
 ```
 
 What changes: only `customer.csv` is checked. The other files in the folder are left alone.
@@ -90,17 +90,17 @@ You can name more than one file, one after another.
 ### Look inside subfolders
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 -r
+.venv/bin/python -m quotes_checker_v1 -r
 ```
 
 What changes: CSV files sitting in folders *inside* the input folder are included. Without `-r`, only the files placed directly in `input_for_quote_check` are read.
 
-Example: `input_for_quote_check\march\orders.csv` is skipped in a normal run, and included when you add `-r`.
+Example: `input_for_quote_check/march/orders.csv` is skipped in a normal run, and included when you add `-r`.
 
 ### The first row is data, not column names
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 --no-header
+.venv/bin/python -m quotes_checker_v1 --no-header
 ```
 
 What changes: the first row is counted as a record, not as titles. Columns are then called `column 1`, `column 2`, and so on.
@@ -126,25 +126,25 @@ The tool usually guesses the separator from the file. Tell it yourself when you 
 Comma (the normal case):
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 --delimiter comma
+.venv/bin/python -m quotes_checker_v1 --delimiter comma
 ```
 
 Pipe, as in `101|Pune|10.00`:
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 --delimiter pipe
+.venv/bin/python -m quotes_checker_v1 --delimiter pipe
 ```
 
 Tab:
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 --delimiter tab
+.venv/bin/python -m quotes_checker_v1 --delimiter tab
 ```
 
 Semicolon, common in some European files (`101;Pune;10.00`):
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 --delimiter semicolon
+.venv/bin/python -m quotes_checker_v1 --delimiter semicolon
 ```
 
 What changes: the tool splits columns on that character instead of guessing. If the guess was wrong, the column list was wrong too. After you set the right separator, the column names and the quote counts line up with the real table.
@@ -156,7 +156,7 @@ If the text report says the separator is only a guess, set `--delimiter` and run
 Normal files use `"`. A few files use `'`.
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 --quote single
+.venv/bin/python -m quotes_checker_v1 --quote single
 ```
 
 What changes: `'Pune'` is treated as a quoted value. With the usual double-quote setting, those single quotes would be read as part of the text.
@@ -168,13 +168,13 @@ The separator and the quote mark must be different characters. `--delimiter comm
 ### The file uses a known text encoding
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 --encoding utf-8
+.venv/bin/python -m quotes_checker_v1 --encoding utf-8
 ```
 
 Another common Windows encoding:
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 --encoding cp1252
+.venv/bin/python -m quotes_checker_v1 --encoding cp1252
 ```
 
 What changes: the tool reads the letters using that encoding instead of detecting it. Use this only when names or cities look garbled (for example `Pune` showing up as strange characters). If you are unsure, leave this off and send the text report to the person who supports the tool.
@@ -182,7 +182,7 @@ What changes: the tool reads the letters using that encoding instead of detectin
 ### Read only the start of a large file
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 --max-rows 1000
+.venv/bin/python -m quotes_checker_v1 --max-rows 1000
 ```
 
 What changes: each file stops after 1,000 data rows. The verdict then describes only those rows. Later rows can still be quoted differently, and the text report says the run stopped early.
@@ -194,7 +194,7 @@ What changes: each file stops after 1,000 data rows. The verdict then describes 
 Settings can be combined. This checks every CSV in the input folder, including subfolders, and treats the separator as a pipe:
 
 ```text
-.venv\Scripts\python -m quotes_checker_v1 -r --delimiter pipe
+.venv/bin/python -m quotes_checker_v1 -r --delimiter pipe
 ```
 
 ---

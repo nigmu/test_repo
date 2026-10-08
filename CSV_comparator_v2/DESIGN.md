@@ -108,7 +108,7 @@ Header names are shown as written in the DataStage file throughout the outputs. 
 
 ### 7.1 Reader settings
 
-Each file is loaded once into a table in an on-disk DuckDB database (`OUTPUT\_tmp\<prefix>.duckdb`). All later steps read these tables, which is much faster than parsing the CSV text again for every step.
+Each file is loaded once into a table in an on-disk DuckDB database (`OUTPUT/_tmp/<prefix>.duckdb`). All later steps read these tables, which is much faster than parsing the CSV text again for every step.
 
 DuckDB `read_csv` settings:
 
@@ -310,7 +310,7 @@ Data rows are identified by their key values, or in fallback by their full conte
 
 ### 13.1 Files
 
-All in `OUTPUT\`:
+All in `OUTPUT/`:
 
 | File | Written when | Contents |
 | --- | --- | --- |
@@ -556,7 +556,7 @@ Total RAM is 10 GB, and other applications can use about 7 GB under load, so onl
 - DuckDB `memory_limit` is set at the start of each pair to half of the memory available at that moment (measured with `psutil`), capped at `MEMORY_LIMIT_MAX_GB` (2 GB) and never below `MEMORY_LIMIT_MIN_GB` (1 GB).
 - `threads` is `min(4, number of CPU cores)` unless `THREADS` is set. Each thread doing a join or grouping needs its own memory, so more threads with a small memory cap means more spilling to disk, not more speed.
 - `preserve_insertion_order` is `false`, which lowers memory use on large loads. No step relies on insertion order.
-- When DuckDB reaches the cap, it spills to `OUTPUT\_tmp` (`temp_directory`) instead of failing.
+- When DuckDB reaches the cap, it spills to `OUTPUT/_tmp` (`temp_directory`) instead of failing.
 - Python-side memory stays small: the Excel writer streams (`constant_memory`), results are fetched in batches, and the CSV outputs never pass through Python.
 
 ### 16.2 Speed
@@ -579,7 +579,7 @@ Temp disk speed matters: spilling and transcoding are much slower on a hard disk
 ### 16.3 Disk
 
 - Before each pair, free space on the output drive is checked against `DISK_FREE_FACTOR` × (DataStage file size + Informatica file size), 4 by default. If there is not enough, the pair stops with the status "Not enough disk space".
-- Temporary files (transcoded copies, the DuckDB database, spill files) live in `OUTPUT\_tmp` and are deleted when the pair finishes.
+- Temporary files (transcoded copies, the DuckDB database, spill files) live in `OUTPUT/_tmp` and are deleted when the pair finishes.
 - The differences CSV can be many gigabytes in the worst case (section 13.1).
 
 ## 17. Reliability and error handling
@@ -587,7 +587,7 @@ Temp disk speed matters: spilling and transcoding are much slower on a hard disk
 - **One pair failing does not stop the run.** Each pair runs inside its own error handler. On an error the tool still tries to write a Summary-only workbook with the result `ERROR` and the message, records it in `run_log.txt`, cleans up, and moves to the next pair.
 - **Out of memory.** If DuckDB still reports out of memory, the pair is retried once with `threads = 1`. If it fails again, it is reported as an error.
 - **Output file open in Excel.** Outputs are written under a temporary name and renamed at the end. If the target file is locked, the result is saved as `<prefix>_comparison_<yyyyMMdd_HHmmss>.xlsx` (and the same for the CSV files), and the run log says so.
-- **Temporary files.** They are removed in a `finally` block after each pair, unless `KEEP_TEMP_ON_ERROR` is on and the pair failed. `OUTPUT\_tmp` is also emptied at startup, in case a previous run was killed.
+- **Temporary files.** They are removed in a `finally` block after each pair, unless `KEEP_TEMP_ON_ERROR` is on and the pair failed. `OUTPUT/_tmp` is also emptied at startup, in case a previous run was killed.
 - **No silent data loss.** Malformed lines are counted and listed (section 7.3). cp1252 fallback bytes are counted and located (section 4). Truncated Excel cells are counted (section 13.2).
 - **Run log.** For each pair: start and end time, result, row counts, output files written, and the error message if any. It also lists ignored files and files without a partner.
 
@@ -597,7 +597,7 @@ Temp disk speed matters: spilling and transcoding are much slower on a hard disk
 | --- | --- | --- |
 | `INPUT_FOLDER` | `INPUT` | Folder for both extracts. DataStage names end in `_ds.csv`, Informatica names end in `_infa.csv` |
 | `OUTPUT_FOLDER` | `OUTPUT` | Output folder |
-| `TEMP_FOLDER` | `OUTPUT\_tmp` | DuckDB database, spill files, transcoded copies |
+| `TEMP_FOLDER` | `OUTPUT/_tmp` | DuckDB database, spill files, transcoded copies |
 | `DS_SUFFIX` / `INFA_SUFFIX` | `_ds.csv` / `_infa.csv` | File name suffixes, matched case-insensitively |
 | `MEMORY_LIMIT_MAX_GB` | `2` | Highest DuckDB memory cap |
 | `MEMORY_LIMIT_MIN_GB` | `1` | Lowest DuckDB memory cap |

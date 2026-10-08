@@ -1,13 +1,13 @@
-1. Install Python.
+1. Install Python 3.9.
 2. Name the DataStage file customer_ds.csv and the Informatica file customer_infa.csv. The first row is the column titles. A wrong ending, or a file with no partner, is skipped.
-3. Put both files in CSV_comparator_v2\INPUT.
-4. Open a command window in the main folder (the one with requirements.txt) and create the virtual environment:
-   python -m venv .venv
+3. Put both files in CSV_comparator_v2/INPUT.
+4. Open a terminal in the main folder (the one with requirements.txt) and create the virtual environment:
+   python3 -m venv .venv
 5. Enter it:
-   .venv\Scripts\activate
+   source .venv/bin/activate
 6. First time only, install the requirements:
    python -m pip install -r requirements.txt
 7. Run the comparison:
-   python CSV_comparator_v2\CSV-CSV.py
+   python CSV_comparator_v2/CSV-CSV.py
 
-Open CSV_comparator_v2\OUTPUT\customer_comparison.xlsx. Close it before running that pair again. Later runs start at step 5.
+Open CSV_comparator_v2/OUTPUT/customer_comparison.xlsx. Close it before running that pair again. Later runs start at step 5.

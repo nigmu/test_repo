@@ -1,5 +1,5 @@
 # Shared virtual environment for both tools. From the repository root:
-#   .venv\Scripts\python -m pip install -r requirements.txt
+#   python -m pip install -r requirements.txt
 
 duckdb==1.4.5
 xlsxwriter==3.2.9

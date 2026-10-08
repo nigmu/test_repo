@@ -15,17 +15,17 @@ Settings are in `configs.py` in this folder. A normal run does not need any chan
 
 1. Install Python.
 2. Name the DataStage file`<file_name>_ds.csv` and the Informatica file `<file_name>_infa.csv`. For example `customer_ds.csv` and `customer. A wrong ending, or a file with no partner, is skipped.
-3. Put both files in `CSV_comparator_v2\INPUT`.
-4. Open a command window in the main folder (the one with `requirements.txt`) and create the virtual environment:
+3. Put both files in `CSV_comparator_v2/INPUT`.
+4. Open a terminal in the main folder (the one with `requirements.txt`) and create the virtual environment:
 
 ```text
-python -m venv .venv
+python3 -m venv .venv
 ```
 
 1. Enter it:
 
 ```text
-.venv\Scripts\activate
+source .venv/bin/activate
 ```
 
 1. First time only, install the requirements:
@@ -37,10 +37,10 @@ python -m pip install -r requirements.txt
 1. Run the comparison:
 
 ```text
-python CSV_comparator_v2\CSV-CSV.py
+python CSV_comparator_v2/CSV-CSV.py
 ```
 
-Open `CSV_comparator_v2\OUTPUT\customer_comparison.xlsx`. Close it before running that pair again. Later runs start at step 5.
+Open `CSV_comparator_v2/OUTPUT/customer_comparison.xlsx`. Close it before running that pair again. Later runs start at step 5.
 
 ---
 
@@ -118,7 +118,7 @@ Column titles are more forgiving than the values. `CUST_ID` and `cust_id` are th
 
 ## Settings in `configs.py`
 
-Open `CSV_comparator_v2\configs.py` with Notepad. Right-click the file, choose **Open with**, then **Notepad**. Do not open it in Word.
+Open `CSV_comparator_v2/configs.py` in a text editor. Do not open it in a word processor.
 
 Each setting is one line: a name, an equals sign, and a value. Change only the value. Keep the quotes you see. `True`, `False`, and `None` must keep that capital letter. Save the file, then run the same command again.
 
@@ -158,13 +158,13 @@ TEMP_FOLDER = _ROOT / "OUTPUT" / "_tmp"
 
 Leave these lines alone if you use the folder in section 2.
 
-Example: the extracts arrive in `D:\Extracts`. Replace the input line with:
+Example: the extracts arrive in `/data/extracts`. Replace the input line with:
 
 ```text
-INPUT_FOLDER = r"D:\Extracts"
+INPUT_FOLDER = "/data/extracts"
 ```
 
-The `r` before the quote matters. It keeps the backslashes as folder separators.
+Use the full Linux path. Forward slashes are the separators.
 
 What changes: both the `_ds` and `_infa` files are read from that one folder. The output folder stays where it is until you change its line too.
 
