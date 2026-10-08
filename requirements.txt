@@ -1,3 +1,7 @@
-duckdb==1.5.5
-xlsxwriter==3.2.9
-psutil==7.2.2
+# Shared virtual environment for both tools. From the repository root:
+#   .venv\Scripts\python -m pip install -r requirements.txt
+#   .venv\Scripts\python -m pip install -r requirements-dev.txt
+
+-r CSV_comparator_v2/requirements.txt
+-e ./quotes_checker_v1
+-e ./CSV_comparator_v2

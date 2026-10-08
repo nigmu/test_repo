@@ -1,2 +1,2 @@
-pytest==9.1.1
-openpyxl==3.1.5
+-r requirements.txt
+-r CSV_comparator_v2/requirements-dev.txt
