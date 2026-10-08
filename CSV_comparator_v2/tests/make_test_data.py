@@ -8,13 +8,13 @@ import struct
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DS = ROOT / "TEST_DATA" / "DATASTG_DATA"
-INFA = ROOT / "TEST_DATA" / "INFO_DATA"
+INPUT = ROOT / "INPUT"
+DS = INPUT
+INFA = INPUT
 
 
 def _ensure_dirs() -> None:
-    DS.mkdir(parents=True, exist_ok=True)
-    INFA.mkdir(parents=True, exist_ok=True)
+    INPUT.mkdir(parents=True, exist_ok=True)
 
 
 def write_worked_example() -> None:

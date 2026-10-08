@@ -32,8 +32,7 @@ def test_large_pair(tmp_path, prefix, all_mismatch):
     out.mkdir()
     temp.mkdir()
     settings = Settings(
-        ds_folder=DS,
-        infa_folder=INFA,
+        input_folder=DS,
         output_folder=out,
         temp_folder=temp,
         excel_sample_rows=1000,

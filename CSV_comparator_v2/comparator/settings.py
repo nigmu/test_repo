@@ -9,8 +9,7 @@ from typing import Any
 
 @dataclass
 class Settings:
-    ds_folder: Path
-    infa_folder: Path
+    input_folder: Path
     output_folder: Path
     temp_folder: Path
     ds_suffix: str = "_ds.csv"
@@ -46,8 +45,7 @@ class Settings:
 
         c = configs_module
         return cls(
-            ds_folder=Path(c.DS_FOLDER),
-            infa_folder=Path(c.INFA_FOLDER),
+            input_folder=Path(c.INPUT_FOLDER),
             output_folder=Path(c.OUTPUT_FOLDER),
             temp_folder=Path(c.TEMP_FOLDER),
             ds_suffix=c.DS_SUFFIX,

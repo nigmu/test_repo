@@ -18,8 +18,8 @@ For each pair of files (one DataStage, one Informatica):
 
 | Role | Folder | Name pattern |
 | --- | --- | --- |
-| DataStage | `TEST_DATA\DATASTG_DATA` | `<prefix>_ds.csv` |
-| Informatica | `TEST_DATA\INFO_DATA` | `<prefix>_infa.csv` |
+| DataStage | `INPUT` | `<prefix>_ds.csv` |
+| Informatica | `INPUT` | `<prefix>_infa.csv` |
 
 - `customer_ds.csv` is compared with `customer_infa.csv`.
 - Suffix and prefix matching is case-insensitive, because Windows file names are. `Customer_DS.csv` pairs with `customer_infa.csv`.
@@ -595,8 +595,7 @@ Temp disk speed matters: spilling and transcoding are much slower on a hard disk
 
 | Setting | Default | Meaning |
 | --- | --- | --- |
-| `DS_FOLDER` | `TEST_DATA\DATASTG_DATA` | DataStage input folder |
-| `INFA_FOLDER` | `TEST_DATA\INFO_DATA` | Informatica input folder |
+| `INPUT_FOLDER` | `INPUT` | Folder for both extracts. DataStage names end in `_ds.csv`, Informatica names end in `_infa.csv` |
 | `OUTPUT_FOLDER` | `OUTPUT` | Output folder |
 | `TEMP_FOLDER` | `OUTPUT\_tmp` | DuckDB database, spill files, transcoded copies |
 | `DS_SUFFIX` / `INFA_SUFFIX` | `_ds.csv` / `_infa.csv` | File name suffixes, matched case-insensitively |
@@ -642,8 +641,8 @@ This tool lives in `CSV_comparator_v2`. Both tools in the repository share the `
 | --- | --- |
 | `configs.py` | All settings in section 18 |
 | `CSV-CSV.py` | Entry point; calls `comparator.runner.main()` |
-| `requirements.txt` | `duckdb==1.5.5`, `xlsxwriter==3.2.9`, `psutil==7.2.2`. The pinned DuckDB version must pass the self-test (section 7.4). |
-| `requirements-dev.txt` | `pytest==9.1.1`, `openpyxl==3.1.5` (tests read workbooks with openpyxl) |
+| `requirements.txt` (repository root) | `duckdb==1.4.5`, `xlsxwriter==3.2.9`, `psutil==7.2.2`. DuckDB 1.4.5 is the last release that installs on Python 3.9. The pinned DuckDB version must pass the self-test (section 7.4). |
+| `requirements-dev.txt` (repository root) | Includes `requirements.txt`, plus `pytest==9.1.1` and `openpyxl==3.1.5` (tests read workbooks with openpyxl) |
 | `comparator/` | Package: `settings`, `model`, `runlog`, `files`, `encoding`, `csvformat`, `db`, `selftest`, `rowcompare`, `columns`, `keys`, `differences`, `csvout`, `excel`, `runner` |
 | `tests/` | `make_test_data.py` (edge-case pairs and 10M-row generators), `conftest.py`, and pytest modules. `pytest.ini` sets `addopts = -m "not slow"` so the default run skips the large-file tests. |
 | `pytest.ini` | Marker `slow` for 10-million-row timing/memory runs |

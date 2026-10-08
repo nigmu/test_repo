@@ -1,11 +1,11 @@
 """Command line entry for the quotes checker.
 
-CSV files go in quotes_checker_v1/quotes_checker/input_for_quote_check.
-A detail report for each file is written to quotes_checker_v1/quotes_checker/output_for_quote_check.
+CSV files go in quotes_checker_v1/input_for_quote_check.
+A detail report for each file is written to quotes_checker_v1/output_for_quote_check.
 The terminal lists columns written with quotes and columns written without them.
 
-    python -m quotes_checker
-    python -m quotes_checker data.csv
+    python -m quotes_checker_v1
+    python -m quotes_checker_v1 data.csv
 """
 
 from __future__ import annotations
@@ -126,7 +126,7 @@ def main(argv: list[str] | None = None) -> int:
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="python -m quotes_checker",
+        prog="python -m quotes_checker_v1",
         description=(
             "Read the CSV files in input_for_quote_check. "
             'Print which columns are written with quotes and which are not. '
@@ -135,9 +135,9 @@ def _parser() -> argparse.ArgumentParser:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "examples:\n"
-            "  python -m quotes_checker\n"
-            "  python -m quotes_checker data.csv\n"
-            "  python -m quotes_checker folder_a folder_b\n"
+            "  python -m quotes_checker_v1\n"
+            "  python -m quotes_checker_v1 data.csv\n"
+            "  python -m quotes_checker_v1 folder_a folder_b\n"
         ),
     )
     parser.add_argument(

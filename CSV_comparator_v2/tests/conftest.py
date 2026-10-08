@@ -18,7 +18,7 @@ from comparator.settings import Settings  # noqa: E402
 @pytest.fixture(scope="session")
 def edge_data():
     write_all_edge_cases()
-    return ROOT / "TEST_DATA"
+    return ROOT / "INPUT"
 
 
 @pytest.fixture
@@ -28,8 +28,7 @@ def tmp_settings(tmp_path, edge_data) -> Settings:
     out.mkdir()
     temp.mkdir()
     return Settings(
-        ds_folder=ROOT / "TEST_DATA" / "DATASTG_DATA",
-        infa_folder=ROOT / "TEST_DATA" / "INFO_DATA",
+        input_folder=ROOT / "INPUT",
         output_folder=out,
         temp_folder=temp,
         excel_sample_rows=1000,

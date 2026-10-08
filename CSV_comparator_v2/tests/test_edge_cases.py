@@ -27,8 +27,7 @@ def _settings(tmp_path, **kwargs) -> Settings:
     out.mkdir()
     temp.mkdir()
     base = dict(
-        ds_folder=DS,
-        infa_folder=INFA,
+        input_folder=DS,
         output_folder=out,
         temp_folder=temp,
         excel_sample_rows=500,

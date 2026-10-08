@@ -1,12 +1,12 @@
 """Run the quotes checker from this file's path.
 
-From quotes_checker_v1, with the shared repository .venv:
+From the repository root, with the shared .venv:
 
-    python -m quotes_checker data.csv
+    python -m quotes_checker_v1 data.csv
 
-Or, from the repository root:
+Or:
 
-    python quotes_checker_v1/quotes_checker/check_quotes.py data.csv
+    python quotes_checker_v1/check_quotes.py data.csv
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ def main() -> int:
     root_text = str(root)
     if root_text not in sys.path:
         sys.path.insert(0, root_text)
-    from quotes_checker.__main__ import main as cli
+    from quotes_checker_v1.__main__ import main as cli
 
     return cli()
 

@@ -32,8 +32,7 @@ def _normalize_suffix(name: str, suffix: str) -> str | None:
 
 
 def discover_pairs(settings: Settings) -> DiscoveryResult:
-    ds_folder = Path(settings.ds_folder)
-    infa_folder = Path(settings.infa_folder)
+    folder = Path(settings.input_folder)
     ds_suffix = settings.ds_suffix
     infa_suffix = settings.infa_suffix
 
@@ -41,31 +40,37 @@ def discover_pairs(settings: Settings) -> DiscoveryResult:
     ds_by_prefix: dict[str, Path] = {}
     infa_by_prefix: dict[str, Path] = {}
 
-    if ds_folder.is_dir():
-        for path in sorted(ds_folder.iterdir()):
-            if not path.is_file() or path.name.startswith("."):
-                continue
-            prefix = _normalize_suffix(path.name, ds_suffix)
-            if prefix is None:
-                ignored.append(str(path))
-                continue
-            key = prefix.lower()
-            ds_by_prefix[key] = path
-    else:
-        ignored.append(f"(missing folder) {ds_folder}")
+    if not folder.is_dir():
+        return DiscoveryResult(
+            pairs=[],
+            ignored=[f"(missing folder) {folder}"],
+            unpaired=[],
+        )
 
-    if infa_folder.is_dir():
-        for path in sorted(infa_folder.iterdir()):
-            if not path.is_file() or path.name.startswith("."):
-                continue
-            prefix = _normalize_suffix(path.name, infa_suffix)
+    # Longer ending first, so "_infa.csv" is not claimed by a shorter ending.
+    rules = sorted(
+        (("ds", ds_suffix), ("infa", infa_suffix)),
+        key=lambda item: len(item[1]),
+        reverse=True,
+    )
+
+    for path in sorted(folder.iterdir()):
+        if not path.is_file() or path.name.startswith("."):
+            continue
+        matched = False
+        for side, suffix in rules:
+            prefix = _normalize_suffix(path.name, suffix)
             if prefix is None:
-                ignored.append(str(path))
                 continue
             key = prefix.lower()
-            infa_by_prefix[key] = path
-    else:
-        ignored.append(f"(missing folder) {infa_folder}")
+            if side == "ds":
+                ds_by_prefix[key] = path
+            else:
+                infa_by_prefix[key] = path
+            matched = True
+            break
+        if not matched:
+            ignored.append(str(path))
 
     unpaired: list[str] = []
     pairs: list[FilePair] = []

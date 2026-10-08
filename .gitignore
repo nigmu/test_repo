@@ -5,3 +5,6 @@ __pycache__/
 *.egg-info/
 .eggs/
 *.csv
+requirements-dev.txt
+pytest.ini
+CSV_comparator_v2/tests/run_large.py

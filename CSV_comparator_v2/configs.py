@@ -4,8 +4,7 @@ from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parent
 
-DS_FOLDER = _ROOT / "TEST_DATA" / "DATASTG_DATA"
-INFA_FOLDER = _ROOT / "TEST_DATA" / "INFO_DATA"
+INPUT_FOLDER = _ROOT / "INPUT"
 OUTPUT_FOLDER = _ROOT / "OUTPUT"
 TEMP_FOLDER = _ROOT / "OUTPUT" / "_tmp"
 

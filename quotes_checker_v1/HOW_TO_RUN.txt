@@ -1,0 +1,13 @@
+1. Install Python.
+2. Name the file so it ends with .csv. Example: customer.csv.
+3. Put the file in quotes_checker_v1\input_for_quote_check.
+4. Open a command window in the main folder (the one with requirements.txt) and create the virtual environment:
+   python -m venv .venv
+5. Enter it:
+   .venv\Scripts\activate
+6. First time only, install the requirements:
+   python -m pip install -r requirements.txt
+7. Run the check:
+   python -m quotes_checker_v1
+
+The short answer appears in the window. The full note for customer.csv is customer.csv.txt in quotes_checker_v1\output_for_quote_check. Later runs start at step 5.

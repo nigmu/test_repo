@@ -1,0 +1,61 @@
+=== CSV–CSV comparator run started 2026-10-08 17:16:30 ===
+[2026-10-08 17:16:30] Cleaning temporary folder
+[2026-10-08 17:16:30] Running self-test
+[2026-10-08 17:16:30] Self-test passed
+[2026-10-08 17:16:30] Ignored file: C:\NPersonal\Projects\KP\CSV_comparator_v2\INPUT\customer_ds (1).csv
+[2026-10-08 17:16:30] No partner: C:\NPersonal\Projects\KP\CSV_comparator_v2\INPUT\lonely_ds.csv
+[2026-10-08 17:16:30] === Pair badkey start ===
+[2026-10-08 17:16:30] Pair badkey: MATCH (rows ds=1 infa=1, 0.2s, peak RSS 57 MB)
+[2026-10-08 17:16:30]   wrote badkey_comparison.xlsx
+[2026-10-08 17:16:30] === Pair coldiff start ===
+[2026-10-08 17:16:30] Pair coldiff: COLUMNS DIFFER – comparison stopped (rows ds=1 infa=1, 0.1s, peak RSS 51 MB)
+[2026-10-08 17:16:30]   wrote coldiff_comparison.xlsx
+[2026-10-08 17:16:30] === Pair customer start ===
+[2026-10-08 17:16:31] Pair customer: MISMATCH (rows ds=7 infa=6, 0.3s, peak RSS 60 MB)
+[2026-10-08 17:16:31]   wrote customer_comparison_differences.csv
+[2026-10-08 17:16:31]   wrote customer_comparison_unpaired.csv
+[2026-10-08 17:16:31]   wrote customer_comparison.xlsx
+[2026-10-08 17:16:31] === Pair delim start ===
+[2026-10-08 17:16:31] Pair delim: MATCH (rows ds=1 infa=1, 0.2s, peak RSS 59 MB)
+[2026-10-08 17:16:31]   wrote delim_comparison.xlsx
+[2026-10-08 17:16:31] === Pair duprows start ===
+[2026-10-08 17:16:31] Pair duprows: MISMATCH (rows ds=4 infa=2, 0.2s, peak RSS 60 MB)
+[2026-10-08 17:16:31]   wrote duprows_comparison_unpaired.csv
+[2026-10-08 17:16:31]   wrote duprows_comparison.xlsx
+[2026-10-08 17:16:31] === Pair hdrspace start ===
+[2026-10-08 17:16:31] Pair hdrspace: MATCH (rows ds=1 infa=1, 0.2s, peak RSS 60 MB)
+[2026-10-08 17:16:31]   wrote hdrspace_comparison.xlsx
+[2026-10-08 17:16:31] === Pair identical start ===
+[2026-10-08 17:16:32] Pair identical: MATCH (rows ds=2 infa=2, 0.2s, peak RSS 61 MB)
+[2026-10-08 17:16:32]   wrote identical_comparison.xlsx
+[2026-10-08 17:16:32] === Pair mankey start ===
+[2026-10-08 17:16:32] Pair mankey: MISMATCH (rows ds=3 infa=3, 0.3s, peak RSS 62 MB)
+[2026-10-08 17:16:32]   wrote mankey_comparison_differences.csv
+[2026-10-08 17:16:32]   wrote mankey_comparison.xlsx
+[2026-10-08 17:16:32] === Pair mixedenc start ===
+[2026-10-08 17:16:32] Pair mixedenc: MATCH (rows ds=1 infa=1, 0.2s, peak RSS 64 MB)
+[2026-10-08 17:16:32]   wrote mixedenc_comparison.xlsx
+[2026-10-08 17:16:32] === Pair nokey start ===
+[2026-10-08 17:16:32] Pair nokey: MISMATCH (rows ds=3 infa=3, 0.2s, peak RSS 64 MB)
+[2026-10-08 17:16:32]   wrote nokey_comparison_mismatches.csv
+[2026-10-08 17:16:32]   wrote nokey_comparison.xlsx
+[2026-10-08 17:16:32] === Pair quotes start ===
+[2026-10-08 17:16:33] Pair quotes: MATCH (rows ds=2 infa=2, 0.2s, peak RSS 64 MB)
+[2026-10-08 17:16:33]   wrote quotes_comparison.xlsx
+[2026-10-08 17:16:33] === Pair rejectbad start ===
+[2026-10-08 17:16:33] Pair rejectbad: Too many malformed lines (rows ds=10 infa=0, 0.1s, peak RSS 63 MB)
+[2026-10-08 17:16:33]   wrote rejectbad_comparison_rejected.csv
+[2026-10-08 17:16:33]   wrote rejectbad_comparison.xlsx
+[2026-10-08 17:16:33] === Pair rejectok start ===
+[2026-10-08 17:16:33] Pair rejectok: COLUMNS DIFFER – comparison stopped (rows ds=100 infa=101, 0.1s, peak RSS 56 MB)
+[2026-10-08 17:16:33]   wrote rejectok_comparison.xlsx
+[2026-10-08 17:16:33] === Pair utf16be start ===
+[2026-10-08 17:16:33] Pair utf16be: MATCH (rows ds=1 infa=1, 0.2s, peak RSS 64 MB)
+[2026-10-08 17:16:33]   wrote utf16be_comparison.xlsx
+[2026-10-08 17:16:33] === Pair utf16le start ===
+[2026-10-08 17:16:33] Pair utf16le: MATCH (rows ds=1 infa=1, 0.2s, peak RSS 63 MB)
+[2026-10-08 17:16:33]   wrote utf16le_comparison.xlsx
+[2026-10-08 17:16:33] === Pair utf16nobom start ===
+[2026-10-08 17:16:34] Pair utf16nobom: MATCH (rows ds=1 infa=1, 0.2s, peak RSS 62 MB)
+[2026-10-08 17:16:34]   wrote utf16nobom_comparison.xlsx
+=== run finished 2026-10-08 17:16:34 ===

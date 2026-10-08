@@ -33,8 +33,7 @@ def customer_settings(tmp_path) -> Settings:
     out.mkdir()
     temp.mkdir()
     return Settings(
-        ds_folder=DS,
-        infa_folder=INFA,
+        input_folder=DS,
         output_folder=out,
         temp_folder=temp,
         excel_sample_rows=1000,
@@ -161,8 +160,7 @@ def test_worked_example_fallback_no_key(tmp_path):
     out.mkdir()
     temp.mkdir()
     settings = Settings(
-        ds_folder=DS,
-        infa_folder=INFA,
+        input_folder=DS,
         output_folder=out,
         temp_folder=temp,
         key_overrides={"customer": None},
